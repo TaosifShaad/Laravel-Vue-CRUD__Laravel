@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\API\AuthController;
 use App\Http\Controllers\EmployeeController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -23,3 +24,8 @@ Route::get('/employees', [EmployeeController::class, 'index']);
 Route::post('/save', [EmployeeController::class, 'store']);
 Route::put('/update/{id}', [EmployeeController::class, 'update']);
 Route::delete('/delete/{id}', [EmployeeController::class, 'destroy']);
+
+Route::controller(AuthController::class)->group(function(){
+    Route::post('login', 'login');
+    Route::post('register', 'register');
+});
