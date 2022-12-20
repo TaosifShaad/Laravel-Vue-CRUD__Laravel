@@ -73,7 +73,7 @@ class AuthController extends Controller
         } else {
             $response = [
                 'success' => false,
-                'message' => 'Unauthorised'
+                'message' => 'Unauthorised!'
             ];
             return response()->json($response);
         }
