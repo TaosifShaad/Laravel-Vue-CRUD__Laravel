@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\API\AuthController;
 use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\MediaController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -23,6 +24,7 @@ Route::middleware('auth:sanctum')->prefix('/')->group(function () {
     Route::delete('/delete/{id}', [EmployeeController::class, 'destroy']);
 });
 
+Route::post('upload', [MediaController::class, 'upload'])->name('upload');
 
 Route::controller(AuthController::class)->group(function(){
     Route::post('login', 'login');
