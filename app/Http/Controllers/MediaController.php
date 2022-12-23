@@ -7,10 +7,12 @@ use App\Models\Media;
 
 class MediaController extends Controller
 {
-    public function upload(Request $request) {
-        $request->validate([
-            'file' => 'required|mimes:png,jpg,jpeg,csv,txt,xlx,xls,pdf|max:2048'
-        ]);
+    /*public function upload(Request $request) {
+
+        // $request->validate([
+        //     'file' => 'required|mimes:png,jpg,jpeg,csv,txt,xlx,xls,pdf'
+        // ]);
+        dd($request->file('file')->getClientOriginalName());
 
         $media = new Media;
         if ($request->file()) {
@@ -28,5 +30,19 @@ class MediaController extends Controller
             return asset($media->path);
             return response()->json(['success'=>'file uploaded successfully.']);
         }
+    }*/
+
+    public function upload(Request $request) {
+        // dd($request->file('file')->getClientOriginalName());
+        $image = $request->file;
+        $name = $image->getClientOriginalName();
+        $image->storeAs('public/images', $name);
+        // $image_save = new Media;
+
+        // $image_save->name = $name;
+        // $path = asset('images/').$name;
+        // $image_save->path = '/storage/'.$path;
+        // $image_save->save();
+        return response()->json(['success'=>'file uploaded successfully.']);
     }
 }

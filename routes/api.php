@@ -24,7 +24,7 @@ Route::middleware('auth:sanctum')->prefix('/')->group(function () {
     Route::delete('/delete/{id}', [EmployeeController::class, 'destroy']);
 });
 
-Route::post('upload', [MediaController::class, 'upload'])->name('upload');
+Route::post('/upload', [MediaController::class, 'upload'])->name('upload');
 
 Route::controller(AuthController::class)->group(function(){
     Route::post('login', 'login');
