@@ -8,7 +8,7 @@ use App\Models\Employee;
 class EmployeeController extends Controller
 {
     public function index() {
-        $employees = Employee::all();
+        $employees = Employee::paginate(8);
         return response()->json($employees);
     }
 
