@@ -90,4 +90,16 @@ class AuthController extends Controller
 
         return response()->json($response);
     }
+
+    public function deleteAcc(Request $request) {
+        $id = $request->input('key');
+        $user = User::find($id);
+        $response = [
+            'user' => $user
+        ];
+        Auth::logout();
+        if ($user->delete()) {
+            return response()->json(['deleted']);
+        }
+    } 
 }
