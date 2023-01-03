@@ -31,4 +31,5 @@ Route::controller(AuthController::class)->group(function(){
     Route::post('register', 'register');
     Route::post('logout', 'logout')->middleware('auth:sanctum');
     Route::post('delete', 'deleteAcc')->middleware('auth:sanctum');
+    Route::post('updateProfile', 'updateProfile')->middleware('auth:sanctum');
 });

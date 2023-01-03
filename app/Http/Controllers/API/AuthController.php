@@ -94,10 +94,28 @@ class AuthController extends Controller
     public function deleteAcc(Request $request) {
         $id = $request->input('key');
         $user = User::find($id);
-        Auth::logout();
-        // $request->user()->currentAccessToken()->delete();
+        $request->user()->currentAccessToken()->delete();
         if ($user->delete()) {
             return response()->json(['deleted']);
         }
-    } 
+    }
+    
+    public function updateProfile(Request $request) {
+        // return $request['name'];
+        $validator = Validator::make($request->all(), [
+            'name' => 'required',
+            'email' => 'required | email',
+        ]);
+        if ($validator->fails()) {
+            $response = [
+                'success' => false,
+                'message' => $validator->errors()
+            ];
+            return response()->json($response, 400);
+        }
+        $user = $request->user();
+        $input = $request->only('name','email');
+        $user->update($input);
+        return response()->json($user);
+    }
 }
